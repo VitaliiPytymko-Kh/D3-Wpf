@@ -7,49 +7,123 @@
         mc:Ignorable="d"
         Title="WPF Media Player" Height="720" Width="1120" WindowStartupLocation="CenterOwner" BorderThickness="3,3,3,4" FontSize="14" FontWeight="Bold" FontStyle="Italic" Background="#FF0073FF" Loaded="Window_loaded">
     <Viewbox>
-    <Canvas MouseWheel="Canvas_MouseWheel" HorizontalAlignment="Center" Height="698"  Width="1114" VerticalAlignment="Center"  Background="#FF707070">
-        <Border  BorderBrush="Black" BorderThickness="1" Height="595" Width="1115" Canvas.Top="40" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" >
-            <Border.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.011"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Border.RenderTransform>
-            <MediaElement x:Name="ME" Margin="5,5,5,5" Stretch="UniformToFill"  />
-        </Border>
-        <Button x:Name="B1" Content="Play" Canvas.Left="15" Canvas.Top="636" HorizontalAlignment="Left" VerticalAlignment="Center" Width="102" Background="#FF14CD33" RenderTransformOrigin="0.5,1.372" Click="B1_Click"/>
-        <Button x:Name="B2" Content="Pouse" Canvas.Left="117" Canvas.Top="636" Width="102" Background="#FFECFF00" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.495,0.621" Click="B2_Click"/>
-        <Button x:Name="B3" Content="Stop" Canvas.Left="219" Canvas.Top="636" Width="102" Background="#FFFF5700" HorizontalAlignment="Left" VerticalAlignment="Center" Click="B3_Click"/>
-        <Button x:Name="B4" Content="Exit" Canvas.Left="654" Canvas.Top="636" Width="102" HorizontalAlignment="Left" VerticalAlignment="Center" Click="B4_Click">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="#FFCCEEE6" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
-        <Button x:Name="B5" Content="Browse ..." Canvas.Left="910" Canvas.Top="9" Width="192" Background="#FFE2E5EA" HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="#FF2DCFB0" RenderTransformOrigin="0.516,-0.485" Click="B5_Click"/>
-        <TextBox x:Name="tb" Canvas.Left="10" TextWrapping="Wrap" Canvas.Top="10" Width="890" HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="#FFCFD6E8">
-            <TextBox.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="#FFCED3B4" Offset="1"/>
-                </LinearGradientBrush>
-            </TextBox.Background>
-        </TextBox>
-        <Slider Name="volumeSlider"  VerticalAlignment="Top" ValueChanged="ChangeMediaVolume" Minimum="0" Maximum="1" Value="0.5" Width="225" Background="#FFFF009D" Canvas.Left="414" Canvas.Top="638" HorizontalAlignment="Left"/>
-        <TextBlock x:Name="Vol" Canvas.Left="341"  TextWrapping="Wrap" Canvas.Top="638" HorizontalAlignment="Left" Height="19" VerticalAlignment="Center" Width="60" RenderTransformOrigin="0.412,-0.067" Background="#FF707070"><Run Text ="Volume"/></TextBlock>
-        <TextBlock x:Name="lblProgressStatus" Canvas.Left="10" Canvas.Top="664">00:00:00</TextBlock>
+        <Canvas MouseWheel="Canvas_MouseWheel" HorizontalAlignment="Center" Height="759"  Width="1114" VerticalAlignment="Center"  Background="#FF707070">
+            <Border  BorderBrush="Black" BorderThickness="1" Height="572" Width="1115" Canvas.Top="40" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" >
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0.011"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+                <MediaElement x:Name="ME" Margin="5,5,5,1" Stretch="UniformToFill"  />
+            </Border>
+            <Button  x:Name="B1" Content="Play"  Canvas.Left="22" Canvas.Top="617" HorizontalAlignment="Left" VerticalAlignment="Top" Width="102"  Click="B1_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF25FF00" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF7F99A0" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.BorderBrush>
 
-        <!--<Slider Name="sliProgress" Thumb.DragStarted="sliProgress_DragStarted"  Thumb.DragCompleted="sliProgress_DragCompleted" ValueChanged="sliProgress_ValueChanged" Canvas.Left="105" Canvas.Top="665" HorizontalAlignment="Left" VerticalAlignment="Center" Width="475" />-->
-        <StatusBarItem  HorizontalContentAlignment="Stretch" Canvas.Left="99" Canvas.Top="661">
-            <Slider Name="sliProgress" Thumb.DragStarted="sliProgress_DragStarted"  Thumb.DragCompleted="sliProgress_DragCompleted" ValueChanged="sliProgress_ValueChanged" Width="520" />
-        </StatusBarItem>
+            </Button>
+            <Button x:Name="B2" Content="Pouse" Canvas.Left="126" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.495,0.621" Click="B2_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FFE4F609" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="B3" Content="Stop" Canvas.Left="231" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Click="B3_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FFE62F2F" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="B4" Content="Exit" Canvas.Left="663" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Click="B4_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FFCCEEE6" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="B5" Content="Browse ..." Canvas.Left="910" Canvas.Top="9" Width="192" HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="#FF2DCFB0" RenderTransformOrigin="0.516,-0.485" Click="B5_Click">
 
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FFC2DCE0" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <TextBox x:Name="tb" Canvas.Left="10" TextWrapping="Wrap" Canvas.Top="10" Width="890" HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="#FFCFD6E8">
+                <TextBox.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FFCED3B4" Offset="1"/>
+                    </LinearGradientBrush>
+                </TextBox.Background>
+            </TextBox>
+            <Slider Name="volumeSlider"  VerticalAlignment="Top" ValueChanged="ChangeMediaVolume" Minimum="0" Maximum="1" Value="0.5" Width="225" Canvas.Left="414" Canvas.Top="621" HorizontalAlignment="Center">
+                <Slider.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF004052" Offset="1"/>
+                    </LinearGradientBrush>
+                </Slider.Background>
+            </Slider>
 
-
-    </Canvas>
+            <TextBlock x:Name="Vol" Canvas.Left="349"  TextWrapping="Wrap" Canvas.Top="620" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="60" RenderTransformOrigin="0.412,-0.067" Background="#FF707070"><Run Text ="Volume"/></TextBlock>
+            <TextBlock x:Name="lblProgressStatus" Canvas.Left="10" Canvas.Top="664" HorizontalAlignment="Center" VerticalAlignment="Top">00:00:00</TextBlock>
+            <StatusBarItem  HorizontalContentAlignment="Stretch" Canvas.Left="99" Canvas.Top="661">
+                <Slider Name="sliProgress" Thumb.DragStarted="sliProgress_DragStarted"  Thumb.DragCompleted="sliProgress_DragCompleted" ValueChanged="sliProgress_ValueChanged" Width="520" />
+            </StatusBarItem>
+        </Canvas>
     </Viewbox>
 </Window>
