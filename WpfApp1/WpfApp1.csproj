@@ -10,12 +10,16 @@
 
   <ItemGroup>
     <None Remove="Start.mp4" />
+    <None Remove="XbhbTVrpRieFj6OH2p1REA.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Start.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="XbhbTVrpRieFj6OH2p1REA.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

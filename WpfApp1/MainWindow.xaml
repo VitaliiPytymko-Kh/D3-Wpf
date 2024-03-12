@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="WPF Media Player" Height="720" Width="1120" WindowStartupLocation="CenterOwner" BorderThickness="3,3,3,4" FontSize="14" FontWeight="Bold" FontStyle="Italic" Background="#FF0073FF" Loaded="Window_loaded">
+        Title="WPF Media Player" Height="720" Width="1334" WindowStartupLocation="CenterOwner" BorderThickness="3,3,3,4" FontSize="14" FontWeight="Bold" FontStyle="Italic"  Loaded="Window_loaded">
     <Window.Resources>
+
         <Style TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
@@ -35,9 +36,17 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Viewbox>
-        <Canvas MouseWheel="Canvas_MouseWheel" HorizontalAlignment="Center" Height="759"  Width="1114" VerticalAlignment="Center"  Background="#FF707070">
-            <Border  BorderBrush="Black" BorderThickness="1" Height="572" Width="1115" Canvas.Top="40" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" >
+    <Window.Background>
+        <ImageBrush ImageSource="/XbhbTVrpRieFj6OH2p1REA.png" Stretch="UniformToFill"/>
+    </Window.Background>
+
+
+
+    <Viewbox >
+
+        <Canvas MouseWheel="Canvas_MouseWheel" HorizontalAlignment="Center" Height="713"  Width="1116" VerticalAlignment="Center">
+
+            <Border  BorderBrush="Black" BorderThickness="1" Height="571" Width="1172" Canvas.Top="40" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Canvas.Left="-67" >
                 <Border.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -46,14 +55,15 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </Border.RenderTransform>
-                <MediaElement x:Name="ME" Margin="5,5,5,1" Stretch="UniformToFill"  />
+                <MediaElement x:Name="ME" Margin="0,5,0,1" Stretch="UniformToFill"  />
             </Border>
+
             <Button  x:Name="B1" Content="Play"  Canvas.Left="22" Canvas.Top="617" HorizontalAlignment="Left" VerticalAlignment="Top" Width="102"  Click="B1_Click"/>
             <Button x:Name="B2" Content="Pouse" Canvas.Left="126" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.495,0.621" Click="B2_Click"/>
             <Button x:Name="B3" Content="Stop" Canvas.Left="231" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Click="B3_Click"/>
             <Button x:Name="B4" Content="Exit" Canvas.Left="663" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Click="B4_Click"/>
             <Button x:Name="B5" Content="Browse ..." Canvas.Left="910" Canvas.Top="9" Width="192" HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="#FF2DCFB0" RenderTransformOrigin="0.516,-0.485" Click="B5_Click"/>
-            <TextBox x:Name="tb" Canvas.Left="10" TextWrapping="Wrap" Canvas.Top="10" Width="890" HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="#FFCFD6E8">
+            <TextBox x:Name="tb" Canvas.Left="-67" TextWrapping="Wrap" Canvas.Top="10" Width="967" HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="#FFCFD6E8">
                 <TextBox.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
@@ -61,19 +71,20 @@
                     </LinearGradientBrush>
                 </TextBox.Background>
             </TextBox>
-            <Slider Name="volumeSlider"  VerticalAlignment="Top" ValueChanged="ChangeMediaVolume" Minimum="0" Maximum="1" Value="0.5" Width="225" Canvas.Left="414" Canvas.Top="621" HorizontalAlignment="Center">
-                <Slider.Background>
+            <Slider Name="volumeSlider"  VerticalAlignment="Top" ValueChanged="ChangeMediaVolume" Minimum="0" Maximum="1" Value="0.5" Width="225" Canvas.Left="414" Canvas.Top="621" HorizontalAlignment="Center" Foreground="#FFD0ECEC"/>
+            <TextBlock x:Name="Vol" Canvas.Left="349"  TextWrapping="Wrap" Canvas.Top="620" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="60" RenderTransformOrigin="0.412,-0.067" TextDecorations="Underline">
+                <TextBlock.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
-                        <GradientStop Color="#FF004052" Offset="1"/>
+                        <GradientStop Color="#FFB47272" Offset="1"/>
                     </LinearGradientBrush>
-                </Slider.Background>
-            </Slider>
-            <TextBlock x:Name="Vol" Canvas.Left="349"  TextWrapping="Wrap" Canvas.Top="620" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="60" RenderTransformOrigin="0.412,-0.067" Background="#FF707070"><Run Text ="Volume"/></TextBlock>
-            <TextBlock x:Name="lblProgressStatus" Canvas.Left="10" Canvas.Top="664" HorizontalAlignment="Center" VerticalAlignment="Top">00:00:00</TextBlock>
+                </TextBlock.Foreground><Run Text ="Volume"/></TextBlock>
+            <TextBlock x:Name="lblProgressStatus" Canvas.Left="10" Canvas.Top="664" HorizontalAlignment="Center"  VerticalAlignment="Top" TextDecorations="Underline" Foreground="#FFB47272" >00:00:00</TextBlock>
             <StatusBarItem  HorizontalContentAlignment="Stretch" Canvas.Left="99" Canvas.Top="661">
-                <Slider Name="sliProgress" Thumb.DragStarted="sliProgress_DragStarted"  Thumb.DragCompleted="sliProgress_DragCompleted" ValueChanged="sliProgress_ValueChanged" Width="520" />
+                <Slider Name="sliProgress" Thumb.DragStarted="sliProgress_DragStarted"  Thumb.DragCompleted="sliProgress_DragCompleted" ValueChanged="sliProgress_ValueChanged" Width="520" Foreground="#FF667070" />
             </StatusBarItem>
+
         </Canvas>
+
     </Viewbox>
 </Window>
