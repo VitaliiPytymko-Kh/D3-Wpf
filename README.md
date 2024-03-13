@@ -1,3 +1,5 @@
+![image](https://github.com/VitaliiPytymko-Kh/D3-Wpf/assets/137927518/bffff9cb-5ab8-47aa-9236-3974efac622b)
+
 додати FlowDocumentReader
 ![image](https://github.com/VitaliiPytymko-Kh/D3-Wpf/assets/137927518/dcb43db2-44cf-42da-8d26-663628185685)
 
