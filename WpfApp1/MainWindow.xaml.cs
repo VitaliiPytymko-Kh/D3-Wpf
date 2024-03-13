@@ -166,5 +166,15 @@ namespace WpfApp1
             userIsDraggingSlider = true;
 
         }
+
+        private void ShowAboutWindow_Click(object sender, RoutedEventArgs e)
+        {
+           
+                AboutWindow aboutWindow = new AboutWindow();
+                aboutWindow.ShowDialog();
+            
+
+
+        }
     }
 }

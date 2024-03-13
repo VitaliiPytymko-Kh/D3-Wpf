@@ -9,11 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="aboutQr_Background.jpg" />
     <None Remove="Start.mp4" />
     <None Remove="XbhbTVrpRieFj6OH2p1REA.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="aboutQr_Background.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Start.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
