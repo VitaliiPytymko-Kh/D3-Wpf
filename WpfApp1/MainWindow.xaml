@@ -1,5 +1,4 @@
-﻿
-    <Window x:Class="WpfApp1.MainWindow"
+﻿<Window  x:Class="WpfApp1.MainWindow"
        
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,18 +6,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="WPF Media Player" Height="720" Width="1334" WindowStartupLocation="CenterOwner" BorderThickness="3,3,3,4" FontSize="14" FontWeight="Bold" FontStyle="Italic"  Loaded="Window_loaded">
+        Title="WPF Media Player"  Height="720" Width="1334" WindowStartupLocation="CenterOwner" BorderThickness="3,3,3,4" FontSize="14" FontWeight="Bold" FontStyle="Italic"  Loaded="Window_loaded">
 
     <Window.CommandBindings>
-        <CommandBinding Command="ApplicationCommands.Open" CanExecute="Open_CanExecute" Executed="Open_Executed" />
-        <CommandBinding Command="MediaCommands.Play" CanExecute="Play_CanExecute" Executed="Play_Executed" />
-        <CommandBinding Command="MediaCommands.Pause" CanExecute="Pause_CanExecute" Executed="Pause_Executed" />
-        <CommandBinding Command="MediaCommands.Stop" CanExecute="Stop_CanExecute" Executed="Stop_Executed" />
+
+        <CommandBinding Command="Rewind" Executed="RewindMedia"/>
+
+        <CommandBinding Command="FastForward" Executed="FastForwardMedia"/>
     </Window.CommandBindings>
 
-
-
     <Window.Resources>
+
 
         <Style TargetType="Button">
             <Setter Property="Template">
@@ -52,13 +50,11 @@
         <ImageBrush ImageSource="/XbhbTVrpRieFj6OH2p1REA.png" Stretch="UniformToFill"/>
     </Window.Background>
 
-
-
-    <Viewbox >
-
-        <Canvas MouseWheel="Canvas_MouseWheel" Button.Click="ButtonClick" HorizontalAlignment="Center" Height="713"  Width="1116" VerticalAlignment="Center">
-
-            <Border  BorderBrush="Black" BorderThickness="1" Height="571" Width="1172" Canvas.Top="40" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Canvas.Left="-67" >
+    <Viewbox  >
+        <Canvas MouseWheel="Canvas_MouseWheel" 
+              
+                HorizontalAlignment="Center" Height="713"  Width="1116" VerticalAlignment="Center">
+            <Border   BorderBrush="Black" BorderThickness="1" Height="571" Width="1172" Canvas.Top="40" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Canvas.Left="-67" >
                 <Border.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -67,16 +63,19 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </Border.RenderTransform>
-                <MediaElement x:Name="ME" Margin="0,5,0,1" />
+                <MediaElement x:Name="ME" Margin="0,5,0,1" LoadedBehavior="Play" UnloadedBehavior="Manual" Source="Start.mp4"  />
             </Border>
 
-            <Button Content="Play"    Canvas.Left="22"  Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Click="MediaCommands.Play"/>
-            <Button Content="Pouse"   Canvas.Left="126" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Click="MediaCommands.Pause"/>
-            <Button Content="Stop"    Canvas.Left="231" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Click="MediaCommands.Stop"/>
-            <Button Content="Exit"    Canvas.Left="663" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Click="B4_Click"/>
-            <Button Content="Open..." Canvas.Left="910" Canvas.Top="9"   Width="192" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ApplicationCommands.Open"/>
-           
-                <TextBox x:Name="tb" Canvas.Left="-67" TextWrapping="Wrap" Canvas.Top="10" Width="967" HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="#FFCFD6E8">
+            <Button Content="Play"    Canvas.Left="22"  Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Click_Play"/>
+            <Button Content="Pаuse"   Canvas.Left="126" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Click_Pause"/>
+            <Button Content="Stop"    Canvas.Left="231" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Click_Stop"/>
+            <Button Content="Exit"    Canvas.Left="1004" Canvas.Top="682" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Click="B4_Click"/>
+            <Button Content="Open..." Canvas.Left="910" Canvas.Top="9"   Width="192" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Click_Open"/>
+
+            <Button Content="Rew" Canvas.Left="338" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Center" Command="Rewind" RenderTransformOrigin="0.482,0.64"/>
+            <Button Content="FForward" Canvas.Left="441" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Command="FastForward"/>
+
+            <TextBox x:Name="tb" Canvas.Left="-67" TextWrapping="Wrap" Canvas.Top="10" Width="967" HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="#FFCFD6E8">
                 <TextBox.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
@@ -84,8 +83,8 @@
                     </LinearGradientBrush>
                 </TextBox.Background>
             </TextBox>
-            <Slider Name="volumeSlider"  VerticalAlignment="Top" ValueChanged="ChangeMediaVolume" Minimum="0" Maximum="1" Value="0.5" Width="225" Canvas.Left="414" Canvas.Top="621" HorizontalAlignment="Center" Foreground="#FFD0ECEC"/>
-            <TextBlock x:Name="Vol" Canvas.Left="349"  TextWrapping="Wrap" Canvas.Top="620" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="60" RenderTransformOrigin="0.412,-0.067" TextDecorations="Underline">
+            <Slider Name="volumeSlider"  VerticalAlignment="Top" ValueChanged="ChangeMediaVolume" Minimum="0" Maximum="1" Value="0.5" Width="225" Canvas.Left="707" Canvas.Top="664" HorizontalAlignment="Left" Foreground="#FFD0ECEC"/>
+            <TextBlock x:Name="Vol" Canvas.Left="642"  TextWrapping="Wrap" Canvas.Top="658" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="60" RenderTransformOrigin="0.412,-0.067" TextDecorations="Underline">
                 <TextBlock.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>

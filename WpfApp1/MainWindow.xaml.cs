@@ -20,8 +20,8 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        private bool mediaPlayerIsPlaying = false;
         private bool userIsDraggingSlider = false;
+
         public MainWindow()
         {
             DispatcherTimer timer = new DispatcherTimer();
@@ -29,15 +29,9 @@ namespace WpfApp1
             timer.Tick += timer_Tick;
             timer.Start();
             InitializeComponent();
-            
+           
         }
-        private void ButtonClick(object sender, RoutedEventArgs e)
-        {
-            // Get the current button.
-            Button cmd = (Button)e.OriginalSource;
-
-        }
-
+       
         private void timer_Tick(object sender, EventArgs e)
         {
             if ((ME.Source != null) && (ME.NaturalDuration.HasTimeSpan) && (!userIsDraggingSlider))
@@ -47,56 +41,7 @@ namespace WpfApp1
                 sliProgress.Value = ME.Position.TotalSeconds;
             }
         }
-      
-        private void Play_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = (ME != null) && (ME.Source != null);
-        }
-
-        private void Play_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            ME.Play();
-            mediaPlayerIsPlaying = true;
-        }
-       
-
-        //}
-        private void Open_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
-
-        private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Media files (*.mp3;*.mpg;*.mpeg)|*.mp3;*.mpg;*.mpeg|All files (*.*)|*.*";
-            if (openFileDialog.ShowDialog() == true)
-                ME.Source = new Uri(openFileDialog.FileName);
-        }
-
-      
-
-        private void Pause_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = mediaPlayerIsPlaying;
-        }
-
-        private void Pause_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            ME.Pause();
-        }
-
-        private void Stop_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = mediaPlayerIsPlaying;
-        }
-
-        private void Stop_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            ME.Stop();
-            mediaPlayerIsPlaying = false;
-        }
-
+            
         //exit
         private void B4_Click(object sender, RoutedEventArgs e)
         {
@@ -109,7 +54,6 @@ namespace WpfApp1
             {
                 ME.Volume = volumeSlider.Value;
 
-                // Добавьте следующую строку для удостоверения воспроизведения после изменения громкости
                 if (ME.LoadedBehavior == MediaState.Pause)
                 {
                     ME.Play();
@@ -127,7 +71,6 @@ namespace WpfApp1
             }
         }
 
-
         private void Canvas_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             double delta = (e.Delta > 0) ? 0.1 : -0.1;
@@ -136,22 +79,21 @@ namespace WpfApp1
             double newVolume = ME.Volume * 100; 
             volumeSlider.Value = Math.Min(Math.Max(newVolume, volumeSlider.Minimum), volumeSlider.Maximum);
         }
-
-
+     
 
         private void sliProgress_DragCompleted(object sender, DragCompletedEventArgs e)
         {
             userIsDraggingSlider = false;
             ME.Position = TimeSpan.FromSeconds(sliProgress.Value);
         }
+      
         private void sliProgress_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lblProgressStatus.Text = TimeSpan.FromSeconds(sliProgress.Value).ToString(@"hh\:mm\:ss");
         }
 
-
         //browse
-        private void B5_Click(object sender, RoutedEventArgs e)
+        private void Click_Open(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -182,8 +124,9 @@ namespace WpfApp1
             }
 
         }
-        
-        readonly string videoURL = @"H:\\Віталій\\WPF\\d3\\Start.mp4 ";
+
+        readonly string videoURL =@"Start.mp4";
+
 
         private void Window_loaded(object sender, RoutedEventArgs e)
         {
@@ -210,12 +153,67 @@ namespace WpfApp1
 
         private void ShowAboutWindow_Click(object sender, RoutedEventArgs e)
         {
-           
                 AboutWindow aboutWindow = new AboutWindow();
                 aboutWindow.ShowDialog();
-            
-
-
+     
         }
+
+        private void Click_Play(object sender, RoutedEventArgs e)
+        {
+            MediaState ms = MediaState.Play;
+            ME.LoadedBehavior = ms;
+        }
+
+        private void Click_Pause(object sender, RoutedEventArgs e)
+        {
+            MediaState uc = MediaState.Pause;
+            ME.LoadedBehavior = uc;
+        }
+
+        private void Click_Stop(object sender, RoutedEventArgs e)
+        {
+            ME.LoadedBehavior = MediaState.Stop;
+        }
+
+        public static class CustomCommands
+        {
+            public static readonly RoutedCommand Rewind = new RoutedCommand("Rewind", typeof(MainWindow));
+            public static readonly RoutedCommand FastForward = new RoutedCommand("FastForward", typeof(MainWindow));
+        }
+
+        // Перемотка назад
+        private void RewindMedia(object sender, ExecutedRoutedEventArgs e)
+        {
+            
+            if (ME.Position.TotalSeconds > 10)
+                ME.Position -= TimeSpan.FromSeconds(10);
+            else
+                ME.Position = TimeSpan.Zero; 
+        }
+
+        // Перемотка вперед
+        private void FastForwardMedia(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (ME != null && ME.NaturalDuration.HasTimeSpan)
+            {
+                TimeSpan newPosition = ME.Position + TimeSpan.FromSeconds(10); 
+                if (newPosition < ME.NaturalDuration.TimeSpan)
+                {
+                    ME.Position = newPosition;
+                }
+                else
+                {
+                    ME.Position = ME.NaturalDuration.TimeSpan; 
+                }
+            }
+        }
+
+       
+        private void RegisterCustomCommands()
+        {
+            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(CustomCommands.Rewind, RewindMedia));
+            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(CustomCommands.FastForward, FastForwardMedia));
+        }
+
     }
 }
