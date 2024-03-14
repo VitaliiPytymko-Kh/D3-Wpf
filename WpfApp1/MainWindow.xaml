@@ -56,7 +56,7 @@
 
     <Viewbox >
 
-        <Canvas MouseWheel="Canvas_MouseWheel" HorizontalAlignment="Center" Height="713"  Width="1116" VerticalAlignment="Center">
+        <Canvas MouseWheel="Canvas_MouseWheel" Button.Click="ButtonClick" HorizontalAlignment="Center" Height="713"  Width="1116" VerticalAlignment="Center">
 
             <Border  BorderBrush="Black" BorderThickness="1" Height="571" Width="1172" Canvas.Top="40" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Canvas.Left="-67" >
                 <Border.RenderTransform>
@@ -70,12 +70,13 @@
                 <MediaElement x:Name="ME" Margin="0,5,0,1" />
             </Border>
 
-            <Button  x:Name="B1" Content="Play"  Canvas.Left="22" Canvas.Top="617" HorizontalAlignment="Left" VerticalAlignment="Top" Width="102"  Command="MediaCommands.Play"/>
-            <Button x:Name="B2" Content="Pouse" Canvas.Left="126" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.495,0.621" Command="MediaCommands.Pause"/>
-            <Button x:Name="B3" Content="Stop" Canvas.Left="231" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top"  Command="MediaCommands.Stop"/>
-            <Button x:Name="B4" Content="Exit" Canvas.Left="663" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Click="B4_Click"/>
-            <Button x:Name="B5" Content="Open..." Canvas.Left="910" Canvas.Top="9" Width="192" HorizontalAlignment="Left" VerticalAlignment="Center"  RenderTransformOrigin="0.516,-0.485" Command="ApplicationCommands.Open"/>
-            <TextBox x:Name="tb" Canvas.Left="-67" TextWrapping="Wrap" Canvas.Top="10" Width="967" HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="#FFCFD6E8">
+            <Button Content="Play"    Canvas.Left="22"  Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Click="MediaCommands.Play"/>
+            <Button Content="Pouse"   Canvas.Left="126" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Click="MediaCommands.Pause"/>
+            <Button Content="Stop"    Canvas.Left="231" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Click="MediaCommands.Stop"/>
+            <Button Content="Exit"    Canvas.Left="663" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Click="B4_Click"/>
+            <Button Content="Open..." Canvas.Left="910" Canvas.Top="9"   Width="192" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ApplicationCommands.Open"/>
+           
+                <TextBox x:Name="tb" Canvas.Left="-67" TextWrapping="Wrap" Canvas.Top="10" Width="967" HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="#FFCFD6E8">
                 <TextBox.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>

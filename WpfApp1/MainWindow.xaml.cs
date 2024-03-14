@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,6 +31,13 @@ namespace WpfApp1
             InitializeComponent();
             
         }
+        private void ButtonClick(object sender, RoutedEventArgs e)
+        {
+            // Get the current button.
+            Button cmd = (Button)e.OriginalSource;
+
+        }
+
         private void timer_Tick(object sender, EventArgs e)
         {
             if ((ME.Source != null) && (ME.NaturalDuration.HasTimeSpan) && (!userIsDraggingSlider))
