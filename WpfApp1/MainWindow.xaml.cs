@@ -19,6 +19,7 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool mediaPlayerIsPlaying = false;
         private bool userIsDraggingSlider = false;
         public MainWindow()
         {
@@ -27,6 +28,7 @@ namespace WpfApp1
             timer.Tick += timer_Tick;
             timer.Start();
             InitializeComponent();
+            
         }
         private void timer_Tick(object sender, EventArgs e)
         {
@@ -37,25 +39,56 @@ namespace WpfApp1
                 sliProgress.Value = ME.Position.TotalSeconds;
             }
         }
-        //play
-        private void B1_Click(object sender, RoutedEventArgs e)
+      
+        private void Play_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            MediaState ms = MediaState.Play;
-            ME.LoadedBehavior = ms;
+            e.CanExecute = (ME != null) && (ME.Source != null);
         }
-        //pause
-        private void B2_Click(object sender, RoutedEventArgs e)
-        {
-            MediaState uc= MediaState.Pause;
-            ME.LoadedBehavior = uc;
 
-        }
-        //stop
-        private void B3_Click(object sender, RoutedEventArgs e)
+        private void Play_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            ME.LoadedBehavior = MediaState.Stop;
-
+            ME.Play();
+            mediaPlayerIsPlaying = true;
         }
+       
+
+        //}
+        private void Open_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Media files (*.mp3;*.mpg;*.mpeg)|*.mp3;*.mpg;*.mpeg|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+                ME.Source = new Uri(openFileDialog.FileName);
+        }
+
+      
+
+        private void Pause_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = mediaPlayerIsPlaying;
+        }
+
+        private void Pause_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            ME.Pause();
+        }
+
+        private void Stop_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = mediaPlayerIsPlaying;
+        }
+
+        private void Stop_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            ME.Stop();
+            mediaPlayerIsPlaying = false;
+        }
+
         //exit
         private void B4_Click(object sender, RoutedEventArgs e)
         {

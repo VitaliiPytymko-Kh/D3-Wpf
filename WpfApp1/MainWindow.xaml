@@ -8,6 +8,16 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="WPF Media Player" Height="720" Width="1334" WindowStartupLocation="CenterOwner" BorderThickness="3,3,3,4" FontSize="14" FontWeight="Bold" FontStyle="Italic"  Loaded="Window_loaded">
+
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Open" CanExecute="Open_CanExecute" Executed="Open_Executed" />
+        <CommandBinding Command="MediaCommands.Play" CanExecute="Play_CanExecute" Executed="Play_Executed" />
+        <CommandBinding Command="MediaCommands.Pause" CanExecute="Pause_CanExecute" Executed="Pause_Executed" />
+        <CommandBinding Command="MediaCommands.Stop" CanExecute="Stop_CanExecute" Executed="Stop_Executed" />
+    </Window.CommandBindings>
+
+
+
     <Window.Resources>
 
         <Style TargetType="Button">
@@ -57,14 +67,14 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </Border.RenderTransform>
-                <MediaElement x:Name="ME" Margin="0,5,0,1" Stretch="UniformToFill"  />
+                <MediaElement x:Name="ME" Margin="0,5,0,1" />
             </Border>
 
-            <Button  x:Name="B1" Content="Play"  Canvas.Left="22" Canvas.Top="617" HorizontalAlignment="Left" VerticalAlignment="Top" Width="102"  Click="B1_Click"/>
-            <Button x:Name="B2" Content="Pouse" Canvas.Left="126" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.495,0.621" Click="B2_Click"/>
-            <Button x:Name="B3" Content="Stop" Canvas.Left="231" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Click="B3_Click"/>
+            <Button  x:Name="B1" Content="Play"  Canvas.Left="22" Canvas.Top="617" HorizontalAlignment="Left" VerticalAlignment="Top" Width="102"  Command="MediaCommands.Play"/>
+            <Button x:Name="B2" Content="Pouse" Canvas.Left="126" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.495,0.621" Command="MediaCommands.Pause"/>
+            <Button x:Name="B3" Content="Stop" Canvas.Left="231" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top"  Command="MediaCommands.Stop"/>
             <Button x:Name="B4" Content="Exit" Canvas.Left="663" Canvas.Top="617" Width="102" HorizontalAlignment="Left" VerticalAlignment="Top" Click="B4_Click"/>
-            <Button x:Name="B5" Content="Browse ..." Canvas.Left="910" Canvas.Top="9" Width="192" HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="#FF2DCFB0" RenderTransformOrigin="0.516,-0.485" Click="B5_Click"/>
+            <Button x:Name="B5" Content="Open..." Canvas.Left="910" Canvas.Top="9" Width="192" HorizontalAlignment="Left" VerticalAlignment="Center"  RenderTransformOrigin="0.516,-0.485" Command="ApplicationCommands.Open"/>
             <TextBox x:Name="tb" Canvas.Left="-67" TextWrapping="Wrap" Canvas.Top="10" Width="967" HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="#FFCFD6E8">
                 <TextBox.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
