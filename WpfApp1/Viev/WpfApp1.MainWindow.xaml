@@ -40,7 +40,7 @@
     </Window.Background>
 
     <Grid >
-       
+    
         <Canvas MouseWheel="Canvas_MouseWheel" HorizontalAlignment="Center" Height="713"  Width="1116" VerticalAlignment="Center">
             <Button Content="Play" Command="{Binding PlayCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,617,0,0" Width="102"/>
             <Button Content="Pause" Command="{Binding PauseCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="126,617,0,0" Width="102"/>

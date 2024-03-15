@@ -21,6 +21,8 @@ namespace WpfApp1.ViewModel
             PauseCommand = new RelayCommand(Pause);
             StopCommand = new RelayCommand(Stop);
             OpenCommand = new RelayCommand(Open);
+            RewindCommand = new RelayCommand(Rewind);
+            FastForwardCommand = new RelayCommand(FastForward);
         }
         public string MediaFilePath
         {
@@ -58,11 +60,14 @@ namespace WpfApp1.ViewModel
                 OnPropertyChanged(nameof(IsPlaying));
             }
         }
+   
 
         public ICommand PlayCommand { get; set; } 
         public ICommand PauseCommand { get; set; }
         public ICommand StopCommand { get; set; }
         public ICommand OpenCommand { get; set; }
+        public ICommand RewCommand { get; set; }
+        public ICommand FfwCommand { get; set; }
 
         private void Play(object parametr)
         {
@@ -71,6 +76,8 @@ namespace WpfApp1.ViewModel
         private void Pause(object parametr) { }
         private void Stop(object parametr) { }
         private void Open(object parametr) { }
+        private void Rew(object parametr) { }
+        private void Ffw(object parametr) { }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
