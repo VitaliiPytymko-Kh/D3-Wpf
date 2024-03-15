@@ -26,4 +26,10 @@
     </Resource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="Viev\" />
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+
 </Project>
